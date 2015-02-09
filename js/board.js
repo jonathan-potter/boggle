@@ -11,7 +11,7 @@
     var CELL_SIZE = 50;
 
     Board.prototype.render = function () {
-        var boggleBoard, cell, letter, letterContainer, self;
+        var boggleBoard, cell, letter, self;
 
         self = this;
 
@@ -27,10 +27,8 @@
                 cell.classList.add('cell');
 
                 letter = self.board[column][row];
-                letterContainer = document.createElement('div');
-                letterContainer.innerHTML = letter;
 
-                cell.appendChild(letterContainer);
+                cell.innerHTML = letter;
                 boggleBoard.appendChild(cell);
             });
         });
@@ -40,8 +38,7 @@
     Board.generate = function (boardSize) {
         var board;
 
-        board = new Array(boardSize.width);
-        board = _.map(board, function () { return new Array(boardSize.height) });
+        board = this.emptyBoard(boardSize);
 
         board = _.map(board, function (column, x) {
             return _.map(board, function (element, y) {
@@ -51,5 +48,14 @@
 
         return board;
     };
+
+    Board.emptyBoard = function (boardSize) {
+        var board;
+
+        board = new Array(boardSize.width);
+        board = _.map(board, function () { return new Array(boardSize.height) });
+
+        return board;
+    }
 
 })(window);
