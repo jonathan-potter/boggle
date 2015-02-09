@@ -23,3 +23,7 @@
     vertical-align: middle;
     line-height: 48px;
 }
+
+.highlighted {
+    background: #aff;
+}

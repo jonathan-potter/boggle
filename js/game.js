@@ -39,43 +39,54 @@
                     x: columnId,
                     y: rowId,
                     visited: visited,
-                    words: words
+                    words: words,
+                    trie: self.dictionary.trie
                 });
             });
         });
+
+        console.log(words); // current method of showing completed executio
+        return words;
     };
 
     Game.prototype.search = function (status) {
-        var currentLetters, detected, self;
+        var currentLetters, detected, highlightedCells, self;
 
         self = this;
+        highlightedCells = [];
 
         if (!(self.board.board[status.x] && self.board.board[status.x][status.y]) || status.visited[status.x][status.y]) { return; };
 
         currentLetters = status.currentLetters || '';
-        currentLetters = currentLetters + self.board.board[status.x][status.y];
+        currentLetters = currentLetters + (self.board.board[status.x][status.y]).toLowerCase();
 
-        detected = _.contains(Boggle.Dictionary.list, currentLetters.toLowerCase())
+        if (status.trie[currentLetters]) {
+            highlightedCells.push(self.board.highlightCell({x: status.x, y: status.y}));
 
-        if (detected) {
-            console.log(currentLetters);
-            words.push(currentLetters);
-        }
+            // if (Object.keys(status.trie[currentLetters]) === 0)
+                status.words.push(currentLetters);
+            // }
 
-        status.visited[status.x][status.y] = true;
+            status.visited[status.x][status.y] = true;
 
-        _.each([-1, 0, 1], function (dx) {
-            _.each([-1, 0, 1], function (dy) {
-                if (dx === 0 ^ dy === 0)
-                self.search({
-                    x: status.x + dx,
-                    y: status.y + dy,
-                    visited: _.cloneDeep(status.visited),
-                    words: status.words,
-                    currentLetters: currentLetters
+            _.each([-1, 0, 1], function (dx) {
+                _.each([-1, 0, 1], function (dy) {
+                    if (dx === 0 ^ dy === 0) {
+                        self.search({
+                            x: status.x + dx,
+                            y: status.y + dy,
+                            visited: _.cloneDeep(status.visited),
+                            words: status.words,
+                            currentLetters: currentLetters,
+                            trie: status.trie[currentLetters]
+                        });
+                    }
                 });
             });
-        });
+            self.board.removeHighlights(highlightedCells);
+        } else {
+            self.board.removeHighlights(highlightedCells);
+        }
     };
 
 })(window);

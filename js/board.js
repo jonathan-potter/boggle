@@ -34,6 +34,26 @@
         });
     };
 
+    Board.prototype.highlightCell = function (cell) {
+        var cell, cellId;
+
+        cellId = 'x' + cell.x + 'y' + cell.y;
+        cell = document.getElementById(cellId);
+
+        cell.classList.add('highlighted');
+
+        return cellId;
+    };
+
+    Board.prototype.removeHighlights = function (cellIds) {
+        var cell;
+
+        _.each(cellIds, function (cellId) {
+            cell = document.getElementById(cellId);
+            cell.classList.remove('highlighted');
+        });
+    }
+
     // Class methods
     Board.generate = function (boardSize) {
         var board;
