@@ -20,14 +20,31 @@
         this.listWords(this.searchGrid());
     };
 
-    Game.prototype.listWords = function (words) {
-        var listItem, wordList;
+    Game.prototype.listWords = function (wordsAndLocationChains) {
+        var listItem, self, word, wordList;
+
+        self = this;
 
         wordList = document.getElementById('word-list');
+        words = _.sortBy(wordsAndLocationChains.words, function (letter) { return letter })
+
         _.each(words, function (word) {
             listItem = document.createElement('li');
 
             listItem.innerHTML = word;
+
+            listItem.addEventListener("mouseover", function (event) {
+                word = event.currentTarget.innerHTML;
+                cells = wordsAndLocationChains.locationChains[word];
+
+                _.each(cells, function (cell) {
+                    self.board.highlightCell(cell)
+                });
+            });
+
+            listItem.addEventListener('mouseout', function () {
+                self.board.removeHighlights();
+            })
 
             wordList.appendChild(listItem);
         });
@@ -38,11 +55,12 @@
     };
 
     Game.prototype.searchGrid = function () {
-        var visited, self, words;
+        var locationChains, self, visited, words;
 
         self = this;
 
         words = [];
+        locationChains = {};
         _.each(self.board.board, function (column, columnId) {
             _.each(self.board.board, function (row, rowId) {
                 visited = Boggle.Board.emptyBoard({
@@ -55,16 +73,18 @@
                     y: rowId,
                     visited: visited,
                     words: words,
-                    trie: self.dictionary.trie
+                    trie: self.dictionary.trie,
+                    locationChains: locationChains,
+                    locationChain: []
                 });
             });
         });
 
-        return words;
+        return {words: words, locationChains: locationChains};;
     };
 
     Game.prototype.search = function (status) {
-        var currentLetters, detected, highlightedCells, self;
+        var currentLetters, detected, self, locationChain;
 
         self = this;
         highlightedCells = [];
@@ -74,11 +94,17 @@
         currentLetters = status.currentLetters || '';
         currentLetters = currentLetters + (self.board.board[status.x][status.y]).toLowerCase();
 
+        locationChain = _.cloneDeep(status.locationChain);
+        locationChain.push({x: status.x, y: status.y});
+
         if (status.trie[currentLetters]) {
-            highlightedCells.push(self.board.highlightCell({x: status.x, y: status.y}));
 
             if (status.trie[currentLetters].word && currentLetters.length > 1) {
                 status.words.push(currentLetters);
+                status.locationChains[currentLetters] = status.locationChains[currentLetters] || [];
+                _.each(locationChain, function (location) {
+                    status.locationChains[currentLetters].push(location);
+                });
             }
 
             status.visited[status.x][status.y] = true;
@@ -92,14 +118,13 @@
                             visited: _.cloneDeep(status.visited),
                             words: status.words,
                             currentLetters: currentLetters,
-                            trie: status.trie[currentLetters]
+                            trie: status.trie[currentLetters],
+                            locationChain: locationChain,
+                            locationChains: status.locationChains
                         });
                     }
                 });
             });
-            self.board.removeHighlights(highlightedCells);
-        } else {
-            self.board.removeHighlights(highlightedCells);
         }
     };
 

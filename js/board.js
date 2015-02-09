@@ -3,8 +3,8 @@
     var Boggle = root.Boggle = (root.Boggle || {});
 
     var Board = Boggle.Board = function () {
-        this.width = 4;
-        this.height = 4;
+        this.width = 14;
+        this.height = 14;
         this.board = Board.generate({ width: this.width, height: this.height });
     };
 
@@ -45,11 +45,12 @@
         return cellId;
     };
 
-    Board.prototype.removeHighlights = function (cellIds) {
-        var cell;
+    Board.prototype.removeHighlights = function () {
+        var cells;
 
-        _.each(cellIds, function (cellId) {
-            cell = document.getElementById(cellId);
+        cells = document.getElementsByClassName('cell');
+
+        _.each(cells, function (cell) {
             cell.classList.remove('highlighted');
         });
     }

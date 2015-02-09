@@ -2,9 +2,14 @@
     margin: 0;
     padding: 0;
     border: 0;
+    list-style: none;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: black;
     display: block;
-    font-family: helvetica neue, helvetica, Arial, sans-serif;
-    font-size: inherit;
+    overflow: auto;
+    position: static;
+    vertical-align: baseline;
 }
 
 #boggle-board {
@@ -32,11 +37,13 @@
 #word-list {
     float: left;
     margin: 25px;
-    width: 200px;
     margin-left: 0;
+    width: 600px;
 }
 
 #word-list > li {
     margin: 2px;
     border-bottom: 1px solid #bbb;
+    float: left;
+    width: 100px;
 }
