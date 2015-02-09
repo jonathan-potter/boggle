@@ -12,6 +12,7 @@
     margin: 25px;
     width: 1px;
     height: 1px;
+    float: left;
 }
 
 .cell {
@@ -26,4 +27,16 @@
 
 .highlighted {
     background: #aff;
+}
+
+#word-list {
+    float: left;
+    margin: 25px;
+    width: 200px;
+    margin-left: 0;
+}
+
+#word-list > li {
+    margin: 2px;
+    border-bottom: 1px solid #bbb;
 }

@@ -16,6 +16,21 @@
     Game.prototype.start = function () {
         this.render();
         this.searchGrid();
+
+        this.listWords(this.searchGrid());
+    };
+
+    Game.prototype.listWords = function (words) {
+        var listItem, wordList;
+
+        wordList = document.getElementById('word-list');
+        _.each(words, function (word) {
+            listItem = document.createElement('li');
+
+            listItem.innerHTML = word;
+
+            wordList.appendChild(listItem);
+        });
     };
 
     Game.prototype.render = function () {
@@ -45,7 +60,6 @@
             });
         });
 
-        console.log(words); // current method of showing completed executio
         return words;
     };
 
@@ -63,9 +77,9 @@
         if (status.trie[currentLetters]) {
             highlightedCells.push(self.board.highlightCell({x: status.x, y: status.y}));
 
-            // if (Object.keys(status.trie[currentLetters]) === 0)
+            if (status.trie[currentLetters].word && currentLetters.length > 1) {
                 status.words.push(currentLetters);
-            // }
+            }
 
             status.visited[status.x][status.y] = true;
 
