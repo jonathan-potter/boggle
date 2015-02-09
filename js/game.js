@@ -17,37 +17,7 @@
         this.render();
         this.searchGrid();
 
-        this.listWords(this.searchGrid());
-    };
-
-    Game.prototype.listWords = function (wordsAndLocationChains) {
-        var listItem, self, word, wordList;
-
-        self = this;
-
-        wordList = document.getElementById('word-list');
-        words = _.sortBy(wordsAndLocationChains.words, function (letter) { return letter })
-
-        _.each(words, function (word) {
-            listItem = document.createElement('li');
-
-            listItem.innerHTML = word;
-
-            listItem.addEventListener("mouseover", function (event) {
-                word = event.currentTarget.innerHTML;
-                cells = wordsAndLocationChains.locationChains[word];
-
-                _.each(cells, function (cell) {
-                    self.board.highlightCell(cell)
-                });
-            });
-
-            listItem.addEventListener('mouseout', function () {
-                self.board.removeHighlights();
-            })
-
-            wordList.appendChild(listItem);
-        });
+        Boggle.Board.listWords(this.searchGrid());
     };
 
     Game.prototype.render = function () {

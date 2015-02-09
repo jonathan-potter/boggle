@@ -3,8 +3,8 @@
     var Boggle = root.Boggle = (root.Boggle || {});
 
     var Board = Boggle.Board = function () {
-        this.width = 14;
-        this.height = 14;
+        this.width = 8;
+        this.height = 8;
         this.board = Board.generate({ width: this.width, height: this.height });
     };
 
@@ -34,7 +34,7 @@
         });
     };
 
-    Board.prototype.highlightCell = function (cell) {
+    Board.highlightCell = function (cell) {
         var cell, cellId;
 
         cellId = 'x' + cell.x + 'y' + cell.y;
@@ -45,7 +45,7 @@
         return cellId;
     };
 
-    Board.prototype.removeHighlights = function () {
+    Board.removeHighlights = function () {
         var cells;
 
         cells = document.getElementsByClassName('cell');
@@ -53,7 +53,7 @@
         _.each(cells, function (cell) {
             cell.classList.remove('highlighted');
         });
-    }
+    };
 
     // Class methods
     Board.generate = function (boardSize) {
@@ -77,6 +77,65 @@
         board = _.map(board, function () { return new Array(boardSize.height) });
 
         return board;
-    }
+    };
+
+    Board.listWords = function (wordsAndLocationChains) {
+        var listItem,  self, uniqueWordCount, uniqueWords, word, wordCount, wordCounts, wordList, words;
+
+        self = this;
+
+        wordList = document.getElementById('word-list');
+
+        wordCount = wordsAndLocationChains.words.length;
+        words = _.sortBy(wordsAndLocationChains.words, function (letter) { return letter })
+        wordCounts = {};
+        uniqueWords = _.unique(_.each(words, function (word) {
+            if (wordCounts[word]) {
+                wordCounts[word] += 1;
+            } else {
+                wordCounts[word] = 1;
+            }
+        }));
+        uniqueWordCount = uniqueWords.length;
+
+        document.getElementById('word-count').innerHTML = uniqueWordCount + ' words found at ' + wordCount + ' locations.';
+
+        _.each(uniqueWords, function (word) {
+            wordList.appendChild(self.generateWordListItem({
+                word: word,
+                wordCount: wordCounts[word],
+                locationChains: wordsAndLocationChains.locationChains[word]
+            }));
+        });
+    };
+
+    Board.generateWordListItem = function (wordMetaData) {
+        var aside, div, listItem, location, locationChains, locations, self;
+
+        self = this;
+
+        word =           wordMetaData.word;
+        wordCount =      wordMetaData.wordCount;
+        locationChains = wordMetaData.locationChains;
+
+        listItem = document.createElement('li');
+
+        listItem.classList.add('listed-word');
+        listItem.innerHTML = '<aside>' + wordCount + '</aside>';
+        listItem.innerHTML +='<div>' + word + '</div>';
+
+        listItem.addEventListener("mouseover", function (event) {
+            word = event.currentTarget.innerHTML;
+            locations = locationChains;
+
+            _.each(locations, function (location) {
+                self.highlightCell(location)
+            });
+        });
+
+        listItem.addEventListener('mouseout', self.removeHighlights);
+
+        return listItem;
+    };
 
 })(window);

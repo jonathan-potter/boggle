@@ -10,14 +10,67 @@
     overflow: auto;
     position: static;
     vertical-align: baseline;
+    color: inherit;
+}
+
+* {
+    transition: 0.1s;
+    font-weight: lighter;
+}
+
+.clearfix {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+body {
+    background: #eee;
+}
+/* HEADER */
+header {
+    margin: 25px;
+    line-height: 37px;
+    margin-bottom: 0;
+    color: #555;
+    vertical-align: middle;
+}
+
+header > h1 {
+    float: left;
+}
+
+nav {
+    margin: 2px;
+    float: left;
+}
+
+nav > ul > li {
+    float: left;
+}
+
+.link-square {
+    background: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+
+/* MAIN */
+
+main {
+    margin: 25px;
+    margin-top: 15px;
 }
 
 #boggle-board {
-    border: 1px solid #ccc;
-    margin: 25px;
     width: 1px;
     height: 1px;
     float: left;
+    padding-right: 25px;
 }
 
 .cell {
@@ -28,22 +81,43 @@
     text-align: center;
     vertical-align: middle;
     line-height: 48px;
+    background: white;
 }
 
 .highlighted {
-    background: #aff;
+    background: #66f;
+    color: white;
+}
+
+#right-container {
+    width: 600px;
+    margin-left: 25px;
+}
+
+#right-container > #word-list li, #right-container p {
+    float: left;
+    margin: 2px;
+    padding: 5px;
+    background: white;
 }
 
 #word-list {
     float: left;
-    margin: 25px;
-    margin-left: 0;
-    width: 600px;
 }
 
-#word-list > li {
-    margin: 2px;
-    border-bottom: 1px solid #bbb;
-    float: left;
-    width: 100px;
+.listed-word {
+    width:  100px;
+    padding: 2px;
+    line-height: 20px;
+}
+
+.listed-word aside {
+    float: right;
+    background: #66f;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
 }

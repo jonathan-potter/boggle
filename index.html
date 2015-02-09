@@ -4,8 +4,31 @@
         <link rel='stylesheet' href='css/boggle.css'></link>
     </head>
     <body>
-        <div id='boggle-board'></div>
-        <ul id='word-list'></ul>
+        <header>
+            <h1>Random Boggle Solver</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="http://github.com/jonathan-potter/boggle" title="Github repo">
+                            <img src="assets/images/GitHub-Mark-32px.png" class="link-square"></img>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life" title="Wikipedia: Conway's Game of Life">
+                            <img src="assets/images/Wikipedia-icon.svg.png" class="link-square"></img>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id='boggle-board'></div>
+            <div id='right-container'>
+                <p id='word-count'></p>
+                <p>Mouseover the words to see where they were found in the Boggle grid.</p>
+                <ul id='word-list'></ul>
+            </div>
+        </main>
 
         <script src='dependencies/lodash-3.1.0.min.js'></script>
 
