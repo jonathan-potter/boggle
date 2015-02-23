@@ -16,12 +16,14 @@
         self = this;
 
         boggleBoard = document.getElementById('boggle-board');
-        boggleBoard.style.width = (this.width * CELL_SIZE + 20) + 'px';
-        boggleBoard.style.height = (this.height * CELL_SIZE) + 'px';
+        // boggleBoard.style.width = (this.width * CELL_SIZE + 20) + 'px';
+        // boggleBoard.style.height = (this.height * CELL_SIZE) + 'px';
 
         _.times(self.width, function (column) {
             _.times(self.height, function (row) {
                 cell = document.createElement('div');
+                cell.style.width = "24%";
+                cell.style.height = "24%";
 
                 cell.id = 'x' + column + 'y' + row;
                 cell.classList.add('cell');
@@ -80,7 +82,8 @@
     };
 
     Board.listWords = function (wordsAndLocationChains) {
-        var listItem,  self, uniqueWordCount, uniqueWords, word, wordCount, wordCounts, wordList, words;
+        var listItem, self, uniqueWordCount, uniqueWords, word, wordCount, wordCounts,
+        wordList, wordRow, words;
 
         self = this;
 
@@ -100,12 +103,21 @@
 
         document.getElementById('word-count').innerHTML = uniqueWordCount + ' words found at ' + wordCount + ' locations.';
 
-        _.each(uniqueWords, function (word) {
-            wordList.appendChild(self.generateWordListItem({
-                word: word,
-                wordCount: wordCounts[word],
-                locationChains: wordsAndLocationChains.locationChains[word]
-            }));
+        wordRow = document.createElement('div');
+        wordRow.classList.add('word-row');
+        _.each(uniqueWords, function (word, wordIndex) {
+            if (wordRow.children.length === 3) {
+                wordList.appendChild(wordRow);
+
+                wordRow = document.createElement('div');
+                wordRow.classList.add('word-row');
+            } else {
+                wordRow.appendChild(self.generateWordListItem({
+                    word: word,
+                    wordCount: wordCounts[word],
+                    locationChains: wordsAndLocationChains.locationChains[word]
+                }));
+            }
         });
     };
 
@@ -121,8 +133,11 @@
         listItem = document.createElement('li');
 
         listItem.classList.add('listed-word');
+        listItem.classList.add('column');
+        listItem.classList.add('one-third');
         listItem.innerHTML = '<aside>' + wordCount + '</aside>';
         listItem.innerHTML +='<div>' + word + '</div>';
+
 
         listItem.addEventListener("mouseover", function (event) {
             word = event.currentTarget.innerHTML;

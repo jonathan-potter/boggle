@@ -3,7 +3,9 @@
     padding: 0;
     border: 0;
     list-style: none;
-    font-family: sans-serif;
+    font-size: inherit;
+    font-family: helvetica neue, sans-serif;
+    letter-spacing: 1px;
     text-decoration: none;
     color: black;
     display: block;
@@ -11,11 +13,13 @@
     position: static;
     vertical-align: baseline;
     color: inherit;
+    border-radius: 2px;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 * {
     transition: 0.1s;
-    font-weight: lighter;
+    font-weight: light;
 }
 
 .clearfix {
@@ -29,20 +33,28 @@ body {
 }
 /* HEADER */
 header {
-    margin: 25px;
-    line-height: 37px;
-    margin-bottom: 0;
-    color: #555;
-    vertical-align: middle;
+    color: black;
+    text-transform: uppercase;
+    border-bottom: 1px solid #aaa;
+    background-color: white;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: 25px;
 }
 
-header > h1 {
-    float: left;
+header * {
+    margin: 0;
+}
+
+heading {
+    display: inline;
+    font-weight: normal;
+    letter-spacing: 2px;
 }
 
 nav {
     margin: 2px;
-    float: left;
+    float: right;
 }
 
 nav > ul > li {
@@ -51,11 +63,10 @@ nav > ul > li {
 
 .link-square {
     background: white;
-    width: 22px;
-    height: 22px;
-    border-radius: 2px;
-    padding: 5px;
-    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    margin-top: 18px;
+    margin-left: 10px;
 }
 
 
@@ -67,17 +78,11 @@ main {
 }
 
 #boggle-board {
-    width: 1px;
-    height: 1px;
-    float: left;
-    padding-right: 25px;
 }
 
 .cell {
-    width: 48px;
-    height: 48px;
     float: left;
-    border: 1px solid #aaa;
+    margin: 1px;
     text-align: center;
     vertical-align: middle;
     line-height: 48px;
@@ -90,29 +95,27 @@ main {
 }
 
 #right-container {
-    width: 600px;
-    margin-left: 25px;
+/*    width: 600px;*/
+/*    margin-left: 25px;*/
 }
 
 #right-container > #word-list li, #right-container p {
-    float: left;
-    margin: 2px;
     padding: 5px;
     background: white;
 }
 
 #word-list {
-    float: left;
 }
 
 .listed-word {
-    width:  100px;
-    padding: 2px;
     line-height: 20px;
+/*    box-sizing: content-box;*/
 }
 
 .listed-word aside {
-    float: right;
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
     background: #66f;
     color: white;
     width: 20px;
@@ -120,4 +123,7 @@ main {
     text-align: center;
     vertical-align: middle;
     line-height: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0;
 }
