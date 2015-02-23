@@ -10,9 +10,10 @@
     };
 
     var CELL_SIZE = 50;
+    var MARGIN_WIDTH_PERCENT = 0.04;
 
     Board.prototype.render = function () {
-        var boggleBoard, cell, cellRow, letter, self;
+        var boggleBoard, cell, cellRow, cellWidthInPercent, letter, self, widthOfMargins;
 
         self = this;
 
@@ -25,15 +26,25 @@
         _.times(self.width, function (column) {
             _.times(self.height, function (row) {
                 cell = document.createElement('li');
-                cell.classList.add('three')
-                cell.classList.add('columns')
+
+                widthOfMargins = (self.width - 1) * MARGIN_WIDTH_PERCENT;
+                cellWidthInPercent = 100 * (1 - widthOfMargins) / self.width;
+
+                cell.style.width = cellWidthInPercent + '%';
+                cell.style.paddingBottom = cellWidthInPercent + '%';
+                cell.style.height = '0';
 
                 cell.id = 'x' + column + 'y' + row;
                 cell.classList.add('cell');
 
                 letter = self.board[column][row];
 
-                cell.innerHTML = letter;
+                letterElement = document.createElement('div');
+                letterElement.classList.add('letter-element');
+                letterElement.innerHTML = letter;
+
+                cell.appendChild(letterElement);
+
                 cellRow.appendChild(cell);
                 self.cells.push(cell);
 

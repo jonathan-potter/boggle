@@ -81,18 +81,24 @@ nav > ul > li {
 .cell {
     float: left;
     text-align: center;
-    line-height: 48px;
     background: white;
+    margin-right: 4%;
+}
+
+.cell > .letter-element {
+    padding-top: 50%;
+    height: 0;
+    overflow: visible;
+    line-height: 0;
+}
+
+.cell:last-child {
+    margin-right: 0;
 }
 
 .highlighted {
     background: #66f;
     color: white;
-}
-
-#right-container {
-/*    width: 600px;*/
-/*    margin-left: 25px;*/
 }
 
 #right-container > #word-list li, #right-container p {
