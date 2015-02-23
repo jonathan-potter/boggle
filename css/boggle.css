@@ -71,20 +71,12 @@ nav > ul > li {
 
 
 /* MAIN */
-
-main {
-    margin: 25px;
-    margin-top: 15px;
-}
-
 #boggle-board {
 }
 
 .cell {
     float: left;
-    margin: 1px;
     text-align: center;
-    vertical-align: middle;
     line-height: 48px;
     background: white;
 }

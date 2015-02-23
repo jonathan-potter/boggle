@@ -6,12 +6,13 @@
         this.width = 4;
         this.height = 4 ;
         this.board = Board.generate({ width: this.width, height: this.height });
+        this.cells = [];
     };
 
     var CELL_SIZE = 50;
 
     Board.prototype.render = function () {
-        var boggleBoard, cell, letter, self;
+        var boggleBoard, cell, cellRow, letter, self;
 
         self = this;
 
@@ -19,11 +20,13 @@
         // boggleBoard.style.width = (this.width * CELL_SIZE + 20) + 'px';
         // boggleBoard.style.height = (this.height * CELL_SIZE) + 'px';
 
+        cellRow = document.createElement('div');
+        cellRow.classList.add('cell-row');
         _.times(self.width, function (column) {
             _.times(self.height, function (row) {
-                cell = document.createElement('div');
-                cell.style.width = "24%";
-                cell.style.height = "24%";
+                cell = document.createElement('li');
+                cell.classList.add('three')
+                cell.classList.add('columns')
 
                 cell.id = 'x' + column + 'y' + row;
                 cell.classList.add('cell');
@@ -31,11 +34,44 @@
                 letter = self.board[column][row];
 
                 cell.innerHTML = letter;
-                boggleBoard.appendChild(cell);
+                cellRow.appendChild(cell);
+                self.cells.push(cell);
+
+                if (cellRow.children.length === self.width) {
+                    boggleBoard.appendChild(cellRow);
+
+                    cellRow = document.createElement('div');
+                    cellRow.classList.add('cell-row');
+                }
             });
         });
     };
 
+    Board.prototype.resizeCells = function () {
+        var boardWidth, boggleBoard, CELL_MARGIN, cellWidth;
+
+        CELL_MARGIN = '4%';
+
+        boggleBoard = document.getElementById('boggle-board');
+        boardWidth = boggleBoard.offsetWidth;
+
+        cellWidth = (((1 - (this.width - 1) * 0.04) / this.width * 100) - 1) + "%";
+
+        _.each(this.cells, function (cell) {
+            cell.style.width = cellWidth;
+        });
+
+        _.each(this.cells, function (cell) {
+            cellWidth = cell.offsetWidth + "px";
+
+            cell.style.height = cellWidth;
+            cell.style.lineHeight = cellWidth;
+            cell.style.marginBottom = CELL_MARGIN;
+            cell.style.marginLeft = CELL_MARGIN;
+        });
+    };
+
+    // Class methods
     Board.highlightCell = function (cell) {
         var cell, cellId;
 
@@ -57,7 +93,6 @@
         });
     };
 
-    // Class methods
     Board.generate = function (boardSize) {
         var board;
 
