@@ -83,6 +83,7 @@ nav > ul > li {
     text-align: center;
     background: white;
     margin-right: 4%;
+    overflow: hidden;
 }
 
 .cell > .letter-element {
