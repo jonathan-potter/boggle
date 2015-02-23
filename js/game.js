@@ -2,6 +2,8 @@
 
     var Boggle = root.Boggle = (root.Boggle || {});
 
+    var MINIMUM_WORD_LENGTH = 3;
+
     var Game = Boggle.Game = function () {
         this.board = new Boggle.Board();
         this.dictionary = new Boggle.Dictionary();
@@ -69,7 +71,7 @@
 
         if (status.trie[currentLetters]) {
 
-            if (status.trie[currentLetters].word && currentLetters.length > 1) {
+            if (status.trie[currentLetters].word && currentLetters.length >= MINIMUM_WORD_LENGTH) {
                 status.words.push(currentLetters);
                 status.locationChains[currentLetters] = status.locationChains[currentLetters] || [];
                 _.each(locationChain, function (location) {
@@ -81,7 +83,7 @@
 
             _.each([-1, 0, 1], function (dx) {
                 _.each([-1, 0, 1], function (dy) {
-                    if (dx === 0 ^ dy === 0) {
+                    if (!(dx === 0 && dy === 0)) {
                         self.search({
                             x: status.x + dx,
                             y: status.y + dy,

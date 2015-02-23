@@ -3,8 +3,8 @@
     var Boggle = root.Boggle = (root.Boggle || {});
 
     var Board = Boggle.Board = function () {
-        this.width = 8;
-        this.height = 8;
+        this.width = 4;
+        this.height = 4 ;
         this.board = Board.generate({ width: this.width, height: this.height });
     };
 
@@ -16,8 +16,8 @@
         self = this;
 
         boggleBoard = document.getElementById('boggle-board');
-        boggleBoard.style.width = this.width * CELL_SIZE + 'px';
-        boggleBoard.style.height = this.height * CELL_SIZE + 'px';
+        boggleBoard.style.width = (this.width * CELL_SIZE + 20) + 'px';
+        boggleBoard.style.height = (this.height * CELL_SIZE) + 'px';
 
         _.times(self.width, function (column) {
             _.times(self.height, function (row) {
