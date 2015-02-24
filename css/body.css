@@ -22,7 +22,7 @@
     color: white;
 }
 
-.listed-word {
+#word-list .listed-word, #right-container > p {
     line-height: 20px;
     padding: 5px;
     background: white;

@@ -4,7 +4,7 @@
 
     var Board = Boggle.Board = function () {
         this.width = 4;
-        this.height = 4 ;
+        this.height = 4;
         this.board = Board.generate({ width: this.width, height: this.height });
         this.cells = [];
     };
