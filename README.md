@@ -8,7 +8,7 @@ SUMMARY:
 ###TRIE
  * the dictionary is stored in a [Trie](http://en.wikipedia.org/wiki/Trie) in order to make recursively searching the board for words easier.
 
-##Technologies Used
+##Libraries Used
  * [lodash](https://lodash.com/)
  * [Skeleton](http://getskeleton.com/)
 
