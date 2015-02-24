@@ -102,20 +102,17 @@ nav > ul > li {
     color: white;
 }
 
-#right-container > #word-list li, #right-container p {
+.listed-word {
+    line-height: 20px;
     padding: 5px;
     background: white;
 }
 
-#word-list {
+.listed-word > div {
+    overflow: hidden;
 }
 
-.listed-word {
-    line-height: 20px;
-/*    box-sizing: content-box;*/
-}
-
-.listed-word aside {
+.listed-word > aside {
     border-radius: 50%;
     margin-right: 10px;
     float: left;

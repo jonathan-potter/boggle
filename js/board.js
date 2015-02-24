@@ -58,30 +58,6 @@
         });
     };
 
-    Board.prototype.resizeCells = function () {
-        var boardWidth, boggleBoard, CELL_MARGIN, cellWidth;
-
-        CELL_MARGIN = '4%';
-
-        boggleBoard = document.getElementById('boggle-board');
-        boardWidth = boggleBoard.offsetWidth;
-
-        cellWidth = (((1 - (this.width - 1) * 0.04) / this.width * 100) - 1) + "%";
-
-        _.each(this.cells, function (cell) {
-            cell.style.width = cellWidth;
-        });
-
-        _.each(this.cells, function (cell) {
-            cellWidth = cell.offsetWidth + "px";
-
-            cell.style.height = cellWidth;
-            cell.style.lineHeight = cellWidth;
-            cell.style.marginBottom = CELL_MARGIN;
-            cell.style.marginLeft = CELL_MARGIN;
-        });
-    };
-
     // Class methods
     Board.highlightCell = function (cell) {
         var cell, cellId;
