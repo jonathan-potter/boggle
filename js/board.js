@@ -128,17 +128,16 @@
         wordRow = document.createElement('div');
         wordRow.classList.add('word-row');
         _.each(uniqueWords, function (word, wordIndex) {
+            wordRow.appendChild(self.generateWordListItem({
+                word: word,
+                wordCount: wordCounts[word],
+                locationChains: wordsAndLocationChains.locationChains[word]
+            }));
             if (wordRow.children.length === 3) {
                 wordList.appendChild(wordRow);
 
                 wordRow = document.createElement('div');
                 wordRow.classList.add('word-row');
-            } else {
-                wordRow.appendChild(self.generateWordListItem({
-                    word: word,
-                    wordCount: wordCounts[word],
-                    locationChains: wordsAndLocationChains.locationChains[word]
-                }));
             }
         });
     };
