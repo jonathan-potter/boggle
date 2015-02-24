@@ -11,8 +11,9 @@
 
     var CELL_SIZE = 50;
     var MARGIN_WIDTH_PERCENT = 0.04;
+    var WORD_LENGTH_MINIMUM = 3;
 
-    Board.prototype.render = function () {
+    Board.prototype.buildBoard = function () {
         var boggleBoard, cell, cellRow, cellWidthInPercent, letter, self, widthOfMargins;
 
         self = this;
@@ -104,7 +105,7 @@
     };
 
     Board.listWords = function (wordsAndLocationChains) {
-        var listItem, self, uniqueWordCount, uniqueWords, word, wordCount, wordCounts,
+        var listItem, self, uniqueWordCount, uniqueWords, uniqueWordsLongerThan3Letters, word, wordCount, wordCounts,
         wordList, wordRow, words;
 
         self = this;
@@ -121,19 +122,21 @@
                 wordCounts[word] = 1;
             }
         }));
-        uniqueWordCount = uniqueWords.length;
+
+        uniqueWordsLongerThan3Letters = _.select(uniqueWords, function (word) { return word.length >= WORD_LENGTH_MINIMUM });
+        uniqueWordCount = uniqueWordsLongerThan3Letters.length;
 
         document.getElementById('word-count').innerHTML = uniqueWordCount + ' words found at ' + wordCount + ' locations.';
 
         wordRow = document.createElement('div');
         wordRow.classList.add('word-row');
-        _.each(uniqueWords, function (word, wordIndex) {
+        _.each(uniqueWordsLongerThan3Letters, function (word, wordIndex) {
             wordRow.appendChild(self.generateWordListItem({
                 word: word,
                 wordCount: wordCounts[word],
                 locationChains: wordsAndLocationChains.locationChains[word]
             }));
-            if (wordRow.children.length === 3) {
+            if (wordRow.children.length === 3 || wordIndex === uniqueWordsLongerThan3Letters.length - 1) {
                 wordList.appendChild(wordRow);
 
                 wordRow = document.createElement('div');

@@ -1,0 +1,49 @@
+.cell {
+    float: left;
+    text-align: center;
+    background: white;
+    margin-right: 4%;
+    overflow: hidden;
+}
+
+.cell > .letter-element {
+    padding-top: 50%;
+    height: 0;
+    overflow: visible;
+    line-height: 0;
+}
+
+.cell:last-child {
+    margin-right: 0;
+}
+
+.highlighted {
+    background: #66f;
+    color: white;
+}
+
+.listed-word {
+    line-height: 20px;
+    padding: 5px;
+    background: white;
+}
+
+.listed-word > div {
+    overflow: hidden;
+}
+
+.listed-word > aside {
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
+    background: #66f;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0;
+}

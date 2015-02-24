@@ -23,7 +23,7 @@
     };
 
     Game.prototype.render = function () {
-        this.board.render();
+        this.board.buildBoard();
     };
 
     Game.prototype.searchGrid = function () {
