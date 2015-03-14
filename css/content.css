@@ -29,6 +29,7 @@
 }
 
 .listed-word > div {
+  /* stops listed words from allowing scrolling if they're a bit too small */
     overflow: hidden;
 }
 
@@ -41,7 +42,6 @@
     width: 20px;
     height: 20px;
     text-align: center;
-    vertical-align: middle;
     line-height: 20px;
     font-size: 10px;
     font-weight: bold;

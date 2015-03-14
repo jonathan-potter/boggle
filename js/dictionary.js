@@ -11,11 +11,11 @@
         var self = this;
 
         _.each(Boggle.originalDictionary, function (word) {
-            self.add(word, self.trie, 0);
+            Dictionary.add(word, self.trie, 0);
         });
     };
 
-    Dictionary.prototype.add = function (word, trie, layer) {
+    Dictionary.add = function (word, trie, layer) {
         if (!word[layer]) { return; }
 
         substring = word.slice(0, layer + 1);

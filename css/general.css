@@ -1,11 +1,11 @@
 * {
+    /* reset */
     margin: 0;
     padding: 0;
     border: 0;
     list-style: none;
     font-size: inherit;
     font-family: helvetica neue, sans-serif;
-    letter-spacing: 1px;
     text-decoration: none;
     color: black;
     display: block;
@@ -13,17 +13,19 @@
     position: static;
     vertical-align: baseline;
     color: inherit;
-    border-radius: 2px;
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
 title {
+    /* undo reckless resetting using * :P */
     display: none;
 }
 
 * {
     transition: 0.1s;
+    border-radius: 2px;
     font-weight: light;
+    letter-spacing: 1px;
 }
 
 body {
