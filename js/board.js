@@ -2,9 +2,14 @@
 
     var Boggle = root.Boggle = (root.Boggle || {});
 
+    var Utils = Boggle.Utils;
+
     var Board = Boggle.Board = function () {
-        this.width = 4;
-        this.height = 4;
+        var locationHash = Utils.parseLocationHash();
+        var N = locationHash['N'] || 4;
+
+        this.width = N;
+        this.height = N;
         this.board = Board.generate({ width: this.width, height: this.height });
         this.cells = [];
     };
